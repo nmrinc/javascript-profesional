@@ -16,6 +16,9 @@
     </ul>
 
     <script>
+
+      // `call` and `apply` calls the function immediately when you declare it.
+
       // Establece `this` usando `call`
       function saludar() {
         console.log(`Hola. Soy ${this.name} ${this.apellido}`);
@@ -44,13 +47,28 @@
         Apply - arreglo
       */
 
-      // Establecer `this` en una nueva función usando `bind`
+      // Establecer `this` en una nueva función usando `bind` | Here, because you create a new function, it will be called when you do it.
       const daniel = { name: 'Daniel', apellido: 'Sánchez' };
       const danielSaluda = saludar.bind(daniel);
       danielSaluda();
 
+      /* 
+        You can pass arguments to the new function just like any other function
+        const danielCamina = caminar.bind(daniel);
+        danielCamina(1000, 'este'); 
+      */
+
+      /*
+        Arguments can be passed directly when you create the new function with bind
+        const danielCamina = caminar.bind(daniel, 2000, 'sur');
+        danielCamina();
+      */
+
+      // Function currying | with this technique you pass partial arguments directly on the bind and later you pass another argument when you call the function
       const danielCamina = caminar.bind(daniel, 2000);
       danielCamina('oeste');
+
+      
 
       // Cuándo es útil usar uno de estos métodos
       const buttons = document.getElementsByClassName('call-to-action');
