@@ -1,0 +1,82 @@
+He aquí un caso real en el cual utilizar generadores es útil
+En el siguiente ejercicio retomaremos la sucesion de fibonacci, pero esta vez el usuario digitará el indice de la sucesión la cual quiere ver
+
+¿Por qué seria útil esto?
+Fibonacci puede llegar a ser un numero muy grande, y si se quisiera obtener el siguiente, lo mejor seria tenerlo guardado en el scope de la funcion, tal y como lo hacen los generators.
+
+Pero
+¿Y si lo que quiero es n sucesiones anteriores a la actual?
+
+Para esos casos lo mejor seria resetear el scope y volver a obtener el fibonacci de nuevo
+¿Y si el caso es obtener n sucesiones posteriores a la actual?
+
+En ese caso lo optimo seria retomar el ultimo valor de la sucesión y continuar a partir de este
+para poder ejectuar el ejemplo, en la consola:
+
+//DECLARACION DE LA FUNCION
+const gen = fibonacci()
+
+//PARA SIGUIENTE INDICE DE SUCESIÓN
+gen.next()
+
+//PARA SABER EL RESULTADO DE 'n' INDICE DE LA SUCESIÓN
+//con 'n' siendo cualquier numero
+gen.next(n)
+
+function*  fibonacci(){
+        //DECLARACION DE VARIABLES
+        let a = 0;
+        let b = 1;
+        let nextNumber = 0
+        let count = 0
+        let n = 0
+        while(true){
+          // n = AL PARAMETRO QUE INGRESA EL USUARIO 
+          n = yield nextNumber
+          // SI n = 0 ARRANCA CON LOS VALOREE POR DEFAULT A EXCEPCION DE count
+          if(n == 0){
+            a = 0;
+            b = 1;
+            nextNumber = 0
+            count = 1
+          }
+          // SI NO, ENTONCES SI: n < count
+          else if(n < count){
+            console.log('Arranca la sucesión desde 0');            
+            a = 0
+            b = 1
+            for (let i = 0; i < n; i++) { 
+              nextNumber = a + b
+              a = b
+              b = nextNumber
+            }
+            count = n
+          }
+          // SI NO, ENTONCES SI: n>= count
+          // AVANZA EL NUMERO DE VECES EN LA SUCESION QUE HAGA FALTA PARA ALCANZAR LA PEDIDA
+          // ES DECIR, NO ARRANCAR DESDE 0 LA SUCESION SINO ARRANCAR DESDE DONDE QUEDASTE
+          // RECORDAR QUE EL RESULTADO PUEDE LLEGAR A SER UN NUMERO MUY GRANDE
+          else if(n >= count){
+            console.log(`Avanza ${n - count} sucesiones`);
+            for (let i = count; i < n; i++) { 
+              nextNumber = a + b
+              a = b
+              b = nextNumber
+            }
+            count = n            
+          }
+          // SI NO, ENTONCES: 
+          // EL CASO EN  QUE gen.next()
+          else{
+            nextNumber = a + b
+            a = b
+            b = nextNumber
+            count ++
+          }         
+        }
+      }
+
+AHORA ES TU TURNO
+El codigo puede ser mejorado para prever cualquier error humano en la digitacion, tambien el codigo se puede optimizar mas.
+Es tu turno de hacer esto posible.
+Buena suerte…
