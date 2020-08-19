@@ -18,7 +18,7 @@ const butt_Mute = document.getElementById('butt_Mute');
 butt_Mute.onclick = () => player.toggleSound();
 
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').catch(error => {
+    navigator.serviceWorker.register('/sw.js').catch(error => {
         console.error(error.message);
     });
 }
