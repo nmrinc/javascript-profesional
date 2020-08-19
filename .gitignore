@@ -167,4 +167,5 @@ $RECYCLE.BIN/
 
 
 # Custom
+.cache
 dist/
