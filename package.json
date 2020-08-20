@@ -14,8 +14,10 @@
     "parcel-bundler": "^1.12.4",
     "typescript": "^3.9.7"
   },
-  "browserlist": [
+  "browserslist": [
     "defaults",
-    "last 1 Chrome version"
+    "not IE 11",
+    "not IE_Mob 11",
+    "maintained node versions"
   ]
 }
