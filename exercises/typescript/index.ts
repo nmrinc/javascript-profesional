@@ -54,3 +54,27 @@ joker = { type: 'Wildcard' };
 
 // Object
 let someObject: object = { species: 'Dog' }
+
+
+/************  FUNCTIONS  ************/
+
+const add_ = (a:number, b:number) => a + b;
+
+const sum_ = add(4,5);
+
+// This way you can specify the type of value will return the function. In this case we specify that will return another function.
+const createAdder = (a:number): (number) => number => { 
+    return function (b:number) {
+        return b + a;
+    }
+}
+const addFour = createAdder(4);
+const fourPlus6 = addFour(6);
+
+
+//const fullName = (firstName: string, lastName?: string): string => `${firstName} ${lastName}`; // Adding a '?' before the type, you can specify that this argument is optional 
+const fullName = (firstName: string, lastName: string = 'Doe'): string => `${firstName} ${lastName}`; // If you want to hace a default value, you can add it with a '=' after the type declaration 
+const erick = fullName('Erick');
+
+console.log(erick);
+
