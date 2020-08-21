@@ -1,18 +1,29 @@
+interface ConfigParams {
+    el: HTMLMediaElement;
+    plugins?: Array<any>;
+}
+
 class MediaPlayer {
     media: HTMLMediaElement;
     plugins: Array<any>
 
-    constructor(config: { el: HTMLMediaElement; plugins: any[]; }) {
+    constructor(config: ConfigParams) {
         this.media = config.el;
-        this.plugins = config.plugins || [];
+        this.plugins = config.plugins;
 
         this.initPlugins();
     }
+
     private initPlugins() {
-        this.plugins.forEach(plugin => {
-            plugin.run(this);
-        });
+        if (!this.plugins || !Array.isArray(this.plugins)){
+            return;
+        } else {
+            this.plugins.forEach(plugin => {
+                plugin.run(this);
+            });
+        }
     }
+
     play() {
         this.media.play();
         //document.getElementById('butt_Play').innerHTML = 'Pause';
@@ -26,7 +37,7 @@ class MediaPlayer {
     togglePlay() {
         this.media.paused ? this.play() : this.pause();
     }
-    
+
     mute() {
         this.media.muted = true;
         //document.getElementById('butt_Mute').innerHTML = 'Unmute';
@@ -36,17 +47,10 @@ class MediaPlayer {
         this.media.muted = false;
         //document.getElementById('butt_Mute').innerHTML = 'Mute';
     }
-    
+
     toggleSound() {
         this.media.muted ? this.unmute() : this.mute();
     }
 }
-
-
-
-
-
-
-
 
 export default MediaPlayer;

@@ -19,5 +19,8 @@
     "not IE 11",
     "not IE_Mob 11",
     "maintained node versions"
-  ]
+  ],
+  "dependencies": {
+    "@babel/polyfill": "^7.10.4"
+  }
 }
