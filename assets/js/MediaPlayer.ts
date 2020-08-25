@@ -5,17 +5,26 @@ interface ConfigParams {
 
 class MediaPlayer {
     media: HTMLMediaElement;
-    plugins: Array<any>
+    plugins: Array<any>;
+    container: HTMLElement;
 
     constructor(config: ConfigParams) {
         this.media = config.el;
         this.plugins = config.plugins;
 
+        this.initPlayer();
         this.initPlugins();
     }
 
+    private initPlayer() {
+        this.container = document.createElement('div');
+        this.container.style.position = 'relative';
+        this.media.parentNode.insertBefore(this.container, this.media);
+        this.container.appendChild(this.media);
+    }
+
     private initPlugins() {
-        if (!this.plugins || !Array.isArray(this.plugins)){
+        if (!this.plugins || !Array.isArray(this.plugins)) {
             return;
         } else {
             this.plugins.forEach(plugin => {
