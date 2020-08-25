@@ -21,6 +21,7 @@
     "maintained node versions"
   ],
   "dependencies": {
-    "@babel/polyfill": "^7.10.4"
+    "@babel/polyfill": "^7.10.4",
+    "@nmrinc/platzimediaplayer": "^1.0.0"
   }
 }
